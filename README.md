@@ -65,3 +65,10 @@ Perform the following tasks:
 - Put each dataset into separate overlays that can be turned on and off independently.
 
 - Add layer controls to your map.
+
+## References/Credits
+
+- [Legend](https://leafletjs.com/examples/choropleth/).  
+- [GeoJson](https://leafletjs.com/examples/geojson/).  
+- Debugging by AskBCS.
+
