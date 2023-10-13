@@ -1,7 +1,7 @@
 // create map object
 let map = L.map('map', {
-    center: [45.52, -122.67],
-    zoom: 5
+    center: [40.52, --94.67],
+    zoom: 3
 });
 
 // create tile layer
@@ -51,14 +51,16 @@ d3.json(response).then(function(data){
     
     // create geojson layer
     L.geoJson(data, {
+        // add circleMarker to map
         pointToLayer : function (feature, latlng){
             return L.circleMarker(latlng)
         },
+        // use styleInfo function to style circleMarkers
         style: styleInfo,
        
         // bind a popup to each layer
         onEachFeature : function(feature, layer){
-            layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3> <h4>Magnitude : ${feature.properties.mag}</h4><h4>Depth : ${feature.geometry.coordinates[2]}</h4>`);
+            layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><h4>Magnitude : ${feature.properties.mag}<br>Depth : ${feature.geometry.coordinates[2]}</h4>`);
         }
     }).addTo(map);
     
