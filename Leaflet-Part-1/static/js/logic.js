@@ -1,13 +1,12 @@
 // create map object
 let map = L.map('map', {
-    center: [40.52, --94.67],
-    zoom: 3
+    center: [45.52, -110.67],
+    zoom: 4
 });
 
 // create tile layer
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', 
-{foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'})
-.addTo(map);
+{foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
 // use link to get GeoJson data
 let response = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
@@ -60,7 +59,7 @@ d3.json(response).then(function(data){
        
         // bind a popup to each layer
         onEachFeature : function(feature, layer){
-            layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><h4>Magnitude : ${feature.properties.mag}<br>Depth : ${feature.geometry.coordinates[2]}</h4>`);
+            layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><h4>Magnitude : ${feature.properties.mag}<br>Depth : ${feature.geometry.coordinates[2]}</h4><br>Time : ${new Date(feature.properties.time)}`);
         }
     }).addTo(map);
     
@@ -73,9 +72,7 @@ d3.json(response).then(function(data){
 
         let div = L.DomUtil.create('div', 'info legend');
             let grades = [-10, 10, 30, 50, 70, 90];
-            // let colors = ["#98EE00", "#D4EE00","#EECC00","#EE9C00","#EA822C",
-            // "#EA2C2C"]
-            
+           
         // loop through our depth intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
